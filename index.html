@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brinna Ventures | Restaurant &amp; Catering</title>
+<link rel="icon" type="image/png" href="logo.png">
+<meta name="description" content="Brinna Ventures: One Name. Many Possibilities. Authentic Ghanaian flavors, catering and events in Accra.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<script defer src="https://shown.io/metrics/Er0LjggZ81" type="text/javascript"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  if (window.tailwind) tailwind.config = {
+    theme: { extend: {
+      colors: { forest:'#2A140C', bronze:'#A9792F', gold:'#DDB75E', ivory:'#FBF5E8', charcoal:'#2E1F18', sand:'#F0E4CC' },
+      fontFamily: { display:['"Playfair Display"','serif'], sans:['"DM Sans"','sans-serif'] }
+    } }
+  }
+</script>
+<style>
+  body{font-family:'DM Sans',sans-serif;color:#2E1F18;background:#FBF5E8}
+  h1,h2,h3,.font-display{font-family:'Playfair Display',serif}
+  @keyframes slowzoom{from{transform:scale(1)}to{transform:scale(1.12)}}
+  .hero-slide{opacity:0;transition:opacity 1.6s ease;transform-origin:center}
+  .hero-slide.active{opacity:1;animation:slowzoom 14s ease-out forwards}
+  .menu-card{transition:transform .2s,box-shadow .2s,border-color .2s;border:2px solid transparent;cursor:pointer}
+  .menu-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px -12px rgba(42,20,12,.35)}
+  .menu-card.selected{border-color:#DDB75E;background:#fffaf0}
+  .drawer{transform:translateX(100%);transition:transform .35s cubic-bezier(.22,.8,.3,1)}
+  .drawer.open{transform:translateX(0)}
+  .fade{opacity:0;pointer-events:none;transition:opacity .25s}
+  .fade.show{opacity:1;pointer-events:auto}
+  .tab-active{background:#2A140C;color:#DDB75E;border-color:#2A140C}
+  .kente{background-image:repeating-linear-gradient(90deg,#4a2a1a 0 16px,#DDB75E 16px 32px,#F6E7B9 32px 48px,#DDB75E 48px 64px)}
+  .reveal{opacity:0;transform:translateY(18px);transition:all .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  input,select{outline:none}
+  input:focus,select:focus{border-color:#A9792F!important;box-shadow:0 0 0 3px rgba(221,183,94,.35)}
+  .ph{position:relative;height:150px;background:linear-gradient(135deg,#2A140C,#4a2a1a 60%,#A9792F);overflow:hidden}
+  .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .ph.noimg{display:none}
+  .no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{scrollbar-width:none}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ============ 01 NAVBAR ============ -->
+<header id="nav" class="fixed top-0 inset-x-0 z-40 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-3 shrink-0" aria-label="Brinna Ventures home">
+      <!-- Logo: embedded from the supplied file. To use a separate file, replace data-img="logo" with src="logo.png" -->
+      <img src="logo.png" alt="Brinna Ventures logo" class="h-12 w-12 rounded-full">
+      <span class="hidden sm:block leading-tight">
+        <span class="block font-display font-bold text-ivory tracking-[.22em] text-[15px]">BRINNA</span>
+        <span class="block text-gold tracking-[.45em] text-[10px] font-semibold">VENTURES</span>
+      </span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-ivory">
+      <a href="#home" class="hover:text-gold transition">Home</a>
+      <a href="#story" class="hover:text-gold transition">Our Story</a>
+      <a href="#services" class="hover:text-gold transition">Services</a>
+      <a href="#menu" class="hover:text-gold transition">Menu</a>
+      <a href="#gallery" class="hover:text-gold transition">Gallery</a>
+      <a href="#enquire" class="hover:text-gold transition">Catering</a>
+      <a href="#contact" class="hover:text-gold transition">Contact</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button id="navCartBtn" class="relative p-2 text-ivory hover:text-gold transition" aria-label="Open cart">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.5a2 2 0 002-1.5L20 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>
+        <span id="navBadge" class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-gold text-forest text-[11px] font-bold flex items-center justify-center hidden">0</span>
+      </button>
+      <button data-reserve class="hidden sm:inline-block bg-gold text-forest text-xs font-bold tracking-widest px-5 py-3 rounded-full hover:bg-bronze hover:text-ivory transition">BOOK A TABLE</button>
+      <button id="burger" class="lg:hidden p-2 text-ivory" aria-label="Menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobileMenu" class="hidden lg:hidden bg-forest border-t border-white/10">
+    <div class="px-6 py-4 flex flex-col gap-4 text-ivory font-medium">
+      <a href="#home" class="mm-link">Home</a><a href="#story" class="mm-link">Our Story</a><a href="#services" class="mm-link">Services</a><a href="#menu" class="mm-link">Menu</a><a href="#gallery" class="mm-link">Gallery</a><a href="#enquire" class="mm-link">Catering &amp; Events</a><a href="#contact" class="mm-link">Contact</a>
+      <button data-reserve class="bg-gold text-forest text-xs font-bold tracking-widest px-5 py-3 rounded-full">BOOK A TABLE</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============ 02 HERO ============ -->
+<section id="home" class="relative min-h-[100svh] overflow-hidden flex items-center bg-forest pt-24 pb-16">
+  <!-- Hero slideshow (photos embedded; add more keys to HERO_SLIDES in the script) -->
+  <div id="heroSlides" class="absolute inset-0">
+    <img src="interior.jpg" alt="Dining hall with tree-shaped lighting" class="hero-slide absolute inset-0 w-full h-full object-cover active">
+    <img src="dancers.jpg" alt="Traditional Ghanaian dancers in kente at a durbar" class="hero-slide absolute inset-0 w-full h-full object-cover">
+  </div>
+  <div class="absolute inset-0 bg-black/55"></div>
+  <div class="relative max-w-7xl mx-auto px-6 w-full text-ivory">
+    <p class="text-gold text-[11px] sm:text-xs tracking-[.3em] font-semibold mb-5">WELCOME TO BRINNA VENTURES</p>
+    <h1 class="font-display font-bold text-4xl sm:text-6xl lg:text-7xl leading-[1.1] max-w-3xl">Where Good Taste Meets Great Company</h1>
+    <p class="mt-4 font-display italic text-gold text-xl sm:text-2xl">One Name. Many Possibilities.</p>
+    <p class="mt-6 max-w-xl text-base sm:text-lg text-ivory/85 leading-relaxed">Experience authentic Ghanaian flavors, contemporary dishes, and rich African hospitality in a space designed to make you feel right at home.</p>
+    <div class="mt-9 flex flex-wrap gap-4">
+      <a href="#menu" class="bg-gold text-forest text-xs font-bold tracking-widest px-8 py-4 rounded-full hover:bg-bronze hover:text-ivory transition">EXPLORE OUR MENU</a>
+      <button data-reserve class="border border-gold text-gold text-xs font-bold tracking-widest px-8 py-4 rounded-full hover:bg-gold hover:text-forest transition">RESERVE A TABLE</button>
+    </div>
+  </div>
+  <div class="absolute bottom-0 inset-x-0 h-1.5 kente"></div>
+</section>
+
+<!-- ============ 03 ABOUT ============ -->
+<section id="story" class="bg-ivory py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <p class="text-bronze text-xs tracking-[.3em] font-semibold mb-4">THE BRINNA EXPERIENCE</p>
+      <h2 class="font-display font-semibold text-3xl sm:text-5xl text-forest leading-tight">More than a restaurant. A place to feel at home.</h2>
+      <p class="mt-6 text-charcoal/80 leading-relaxed">Step in and settle down. Brinna Ventures blends the polish of a modern lounge with the soul of the Ghanaian table, where every soup is simmered the traditional way and every guest is welcomed like family.</p>
+      <p class="mt-4 text-charcoal/80 leading-relaxed">On Sundays our kitchen turns to tradition with Omo Tuo, Tuo Zaafi and Konkonte, served the way they are meant to be shared. Curated hospitality, warm wood, clay pottery and woven textiles make every visit in Accra feel personal.</p>
+      <div class="mt-8 grid grid-cols-3 gap-4 text-center">
+        <div class="bg-sand rounded-xl py-5"><p class="font-display text-2xl text-forest font-bold">8+</p><p class="text-xs text-charcoal/70 mt-1">Local soups</p></div>
+        <div class="bg-sand rounded-xl py-5"><p class="font-display text-2xl text-forest font-bold">Sun</p><p class="text-xs text-charcoal/70 mt-1">Traditional specials</p></div>
+        <div class="bg-sand rounded-xl py-5"><p class="font-display text-2xl text-forest font-bold">100%</p><p class="text-xs text-charcoal/70 mt-1">Ghanaian warmth</p></div>
+      </div>
+    </div>
+    <div class="reveal relative">
+      <img src="garden.jpg" class="rounded-2xl w-full h-[420px] sm:h-[520px] object-cover shadow-xl" alt="Garden seating area in Accra">
+      <div class="absolute -bottom-5 -left-3 sm:-left-6 bg-forest text-ivory px-6 py-4 rounded-xl shadow-lg border border-gold/40">
+        <p class="font-display text-gold text-lg">“Akwaaba”</p><p class="text-xs text-ivory/70">Welcome home</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="bg-forest text-ivory py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="text-gold text-xs tracking-[.3em] font-semibold mb-3">WHAT WE DO</p>
+      <h2 class="font-display font-semibold text-3xl sm:text-5xl">One name. Many possibilities.</h2>
+      <p class="mt-4 text-ivory/70 text-sm">From a quiet lunch to a full event, Brinna Ventures handles it with care.</p>
+    </div>
+    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="reveal rounded-2xl border border-gold/30 bg-white/5 p-7"><div class="w-14 h-14 rounded-full bg-gold/15 text-gold flex items-center justify-center"><svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 3v8a2 2 0 002 2v8M10 3v6M6 7h4M18 3c-2 2-3 5-3 8h3v10"/></svg></div><h3 class="font-display text-xl mt-5">Dine-In</h3><p class="text-sm text-ivory/70 mt-2 leading-relaxed">Authentic Ghanaian dishes in a warm, relaxed setting. Reserve a table in seconds.</p><button data-reserve class="mt-5 text-xs font-bold tracking-widest text-gold underline underline-offset-4">BOOK A TABLE</button></div>
+      <div class="reveal rounded-2xl border border-gold/30 bg-white/5 p-7"><div class="w-14 h-14 rounded-full bg-gold/15 text-gold flex items-center justify-center"><svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7h11v9H3zM14 10h4l3 3v3h-7M7 19a1.500 1.500 0 100-3 1.500 1.500 0 000 3zM17 19a1.500 1.500 0 100-3 1.500 1.500 0 000 3z"/></svg></div><h3 class="font-display text-xl mt-5">Pickup &amp; Delivery</h3><p class="text-sm text-ivory/70 mt-2 leading-relaxed">Build your order online and send it straight to us on WhatsApp.</p><a href="#menu" class="mt-5 inline-block text-xs font-bold tracking-widest text-gold underline underline-offset-4">ORDER NOW</a></div>
+      <div class="reveal rounded-2xl border border-gold/30 bg-white/5 p-7"><div class="w-14 h-14 rounded-full bg-gold/15 text-gold flex items-center justify-center"><svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 15h16a8 8 0 00-16 0zM2 18h20M12 7V5M10 5h4"/></svg></div><h3 class="font-display text-xl mt-5">Catering</h3><p class="text-sm text-ivory/70 mt-2 leading-relaxed">Jollof, soups, grills and more by the tray for offices, family gatherings and parties.</p><a href="#enquire" class="mt-5 inline-block text-xs font-bold tracking-widest text-gold underline underline-offset-4">GET A QUOTE</a></div>
+      <div class="reveal rounded-2xl border border-gold/30 bg-white/5 p-7"><div class="w-14 h-14 rounded-full bg-gold/15 text-gold flex items-center justify-center"><svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l2.500 5.500 6 .7-4.400 4.100 1.200 5.900L12 16.300 6.700 19.200l1.200-5.900L3.500 9.200l6-.7z"/></svg></div><h3 class="font-display text-xl mt-5">Events &amp; Private Dining</h3><p class="text-sm text-ivory/70 mt-2 leading-relaxed">Birthdays, receptions, corporate lunches and celebrations, planned around you.</p><a href="#enquire" class="mt-5 inline-block text-xs font-bold tracking-widest text-gold underline underline-offset-4">ENQUIRE</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 SIGNATURE ============ -->
+<section id="signature" class="bg-sand py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="text-bronze text-xs tracking-[.3em] font-semibold mb-3">SIGNATURE HIGHLIGHTS</p>
+      <h2 class="font-display font-semibold text-3xl sm:text-5xl text-forest">Dishes people come back for</h2>
+    </div>
+    <div id="sigGrid" class="mt-14 grid md:grid-cols-3 gap-8"></div>
+  </div>
+</section>
+
+<!-- ============ 05 MENU ============ -->
+<section id="menu" class="bg-ivory py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="text-bronze text-xs tracking-[.3em] font-semibold mb-3">OUR MENU</p>
+      <h2 class="font-display font-semibold text-3xl sm:text-5xl text-forest">Taste of Ghana, plated with care</h2>
+      <p class="mt-4 text-charcoal/70 text-sm">Tap any item to add it to your order. Prices in Ghana cedis (GH₵).</p>
+    </div>
+    <div id="tabs" class="mt-10 flex gap-2 overflow-x-auto no-scrollbar sm:flex-wrap sm:justify-center pb-2"></div>
+    <div id="menuRoot" class="mt-10 space-y-14"></div>
+  </div>
+</section>
+
+<!-- ============ 06 GALLERY ============ -->
+<section id="gallery" class="bg-sand py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="text-bronze text-xs tracking-[.3em] font-semibold mb-3">CULTURE &amp; AMBIENCE</p>
+      <h2 class="font-display font-semibold text-3xl sm:text-5xl text-forest">Warmth you can see</h2>
+    </div>
+    <div id="galleryGrid" class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-5"></div>
+  </div>
+</section>
+
+<!-- ============ ENQUIRE ============ -->
+<section id="enquire" class="bg-ivory py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
+    <div class="reveal">
+      <p class="text-bronze text-xs tracking-[.3em] font-semibold mb-3">CATERING &amp; EVENTS</p>
+      <h2 class="font-display font-semibold text-3xl sm:text-5xl text-forest leading-tight">Planning something? Let us feed the room.</h2>
+      <p class="mt-5 text-charcoal/75 leading-relaxed">Tell us what you need and we will reply on WhatsApp with options and a quote.</p>
+      <form id="enqForm" class="mt-8 grid grid-cols-2 gap-4" novalidate>
+        <div class="col-span-2 sm:col-span-1"><label class="text-xs font-semibold text-charcoal/70">Your name</label><input name="name" class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm" placeholder="Full name"></div>
+        <div class="col-span-2 sm:col-span-1"><label class="text-xs font-semibold text-charcoal/70">Phone</label><input name="phone" type="tel" class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm" placeholder="+233 ..."></div>
+        <div class="col-span-2 sm:col-span-1"><label class="text-xs font-semibold text-charcoal/70">I need</label><select name="type" class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm"><option>Catering</option><option>Event / Private dining</option><option>Bulk order</option><option>Something else</option></select></div>
+        <div class="col-span-2 sm:col-span-1"><label class="text-xs font-semibold text-charcoal/70">Number of guests</label><input name="guests" type="number" min="1" class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm" placeholder="e.g. 40"></div>
+        <div class="col-span-2"><label class="text-xs font-semibold text-charcoal/70">Event date</label><input name="date" type="date" class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm"></div>
+        <div class="col-span-2"><label class="text-xs font-semibold text-charcoal/70">Details</label><textarea name="notes" rows="3" class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm outline-none" placeholder="Dishes you have in mind, venue, budget..."></textarea></div>
+        <button class="col-span-2 bg-forest text-gold font-bold text-xs tracking-widest py-4 rounded-full hover:bg-bronze hover:text-ivory transition">SEND ENQUIRY VIA WHATSAPP</button>
+      </form>
+    </div>
+    <div class="reveal space-y-8">
+      <div>
+        <h3 class="font-display text-2xl text-forest mb-4">Good to know</h3>
+        <div class="space-y-3">
+          <details class="bg-white rounded-xl p-4 border border-sand"><summary class="font-semibold text-sm cursor-pointer text-charcoal">How do I place an order?</summary><p class="text-sm text-charcoal/70 mt-2 leading-relaxed">Tap items in the menu, open your order, enter your name and phone, then send it to us on WhatsApp. Orders are taken on WhatsApp only.</p></details>
+          <details class="bg-white rounded-xl p-4 border border-sand"><summary class="font-semibold text-sm cursor-pointer text-charcoal">Do you do delivery?</summary><p class="text-sm text-charcoal/70 mt-2 leading-relaxed">Send your order on WhatsApp and tell us where you are. We confirm delivery availability, fee and time in the chat.</p></details>
+          <details class="bg-white rounded-xl p-4 border border-sand"><summary class="font-semibold text-sm cursor-pointer text-charcoal">Can you cater for large groups?</summary><p class="text-sm text-charcoal/70 mt-2 leading-relaxed">Absolutely. Send us the date and guest count in the form and we will come back with a quote.</p></details>
+          <details class="bg-white rounded-xl p-4 border border-sand"><summary class="font-semibold text-sm cursor-pointer text-charcoal">When are the Sunday specials served?</summary><p class="text-sm text-charcoal/70 mt-2 leading-relaxed">Omo Tuo, Tuo Zaafi and Konkonte are served on Sundays only.</p></details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ 07 FOOTER ============ -->
+<footer id="contact" class="bg-forest text-ivory">
+  <div class="h-1.5 kente"></div>
+  <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-10">
+    <div class="md:col-span-1">
+      <div class="flex items-center gap-3">
+        <!-- Logo: embedded from the supplied file -->
+        <img src="logo.png" alt="Brinna Ventures logo" class="h-14 w-14 rounded-full">
+        <div class="leading-tight"><p class="font-display font-bold tracking-[.22em] text-sm">BRINNA</p><p class="text-gold tracking-[.45em] text-[10px] font-semibold">VENTURES</p></div>
+      </div>
+      <p class="mt-5 text-sm text-ivory/70 leading-relaxed">One Name. Many Possibilities.</p>
+      <div class="mt-5 flex gap-3">
+        <a href="https://wa.me/233209470634" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 rounded-full border border-gold/50 text-gold flex items-center justify-center hover:bg-gold hover:text-forest transition"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.700 6.700 0 01-3.300-2.900c-.2-.4.200-.4.700-1.300.1-.2 0-.3 0-.5l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.100-.7.300-.2.300-.9.900-.9 2.200s.9 2.500 1.100 2.700c.1.200 1.800 2.800 4.400 3.900 1.600.7 2.300.7 3.100.6.500-.1 1.500-.6 1.700-1.200.2-.6.2-1.100.2-1.200-.1-.1-.3-.2-.5-.3z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h3 class="font-display text-gold text-lg mb-4">Get in touch</h3>
+      <p class="text-sm text-ivory/80 leading-relaxed">Orders, reservations, catering and events are all handled on WhatsApp.</p>
+      <a href="https://wa.me/233209470634" target="_blank" rel="noopener" class="mt-4 flex items-center gap-2 text-sm text-ivory hover:text-gold transition"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.700 6.700 0 01-3.300-2.900c-.2-.4.200-.4.700-1.300.1-.2 0-.3 0-.5l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.100-.7.300-.2.300-.9.900-.9 2.200s.9 2.500 1.100 2.700c.1.200 1.800 2.800 4.400 3.900 1.600.7 2.300.7 3.100.6.500-.1 1.500-.6 1.700-1.200.2-.6.2-1.100.2-1.200-.1-.1-.3-.2-.5-.3z"/></svg> Order on WhatsApp: 020 947 0634</a>
+      <p class="mt-4 text-xs bg-gold/15 text-gold rounded-lg px-3 py-2 inline-block">Sunday Traditional Specials: Omo Tuo, Tuo Zaafi &amp; Konkonte</p>
+    </div>
+    <div>
+      <h3 class="font-display text-gold text-lg mb-4">Quick links</h3>
+      <ul class="text-sm text-ivory/80 space-y-2">
+        <li><a class="hover:text-gold" href="#story">Our Story</a></li><li><a class="hover:text-gold" href="#services">Services</a></li><li><a class="hover:text-gold" href="#enquire">Catering &amp; Events</a></li><li><a class="hover:text-gold" href="#menu">Menu</a></li><li><a class="hover:text-gold" href="#gallery">Gallery</a></li>
+      </ul>
+      <button data-reserve class="mt-5 bg-gold text-forest text-xs font-bold tracking-widest px-6 py-3 rounded-full hover:bg-bronze hover:text-ivory transition">RESERVE A TABLE</button>
+    </div>
+  </div>
+  <div class="border-t border-white/10 py-5 text-center text-xs text-ivory/50">© <span id="yr"></span> Brinna Ventures. One Name. Many Possibilities.</div>
+</footer>
+
+<!-- Floating contact buttons -->
+<div class="fixed z-30 left-5 bottom-24 sm:bottom-5 flex flex-col gap-3">
+  <a href="https://wa.me/233209470634" target="_blank" rel="noopener" aria-label="WhatsApp Brinna Ventures" class="w-12 h-12 rounded-full bg-[#25D366] text-white shadow-xl flex items-center justify-center"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.700 6.700 0 01-3.300-2.900c-.2-.4.200-.4.700-1.300.1-.2 0-.3 0-.5l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.100-.7.300-.2.300-.9.900-.9 2.200s.9 2.500 1.100 2.700c.1.200 1.800 2.800 4.400 3.900 1.600.7 2.300.7 3.100.6.500-.1 1.500-.6 1.700-1.200.2-.6.2-1.100.2-1.200-.1-.1-.3-.2-.5-.3z"/></svg></a>
+</div>
+
+<!-- Floating order pill -->
+<button id="floatCart" class="fixed z-30 bottom-5 right-5 left-5 sm:left-auto bg-forest text-gold border border-gold/60 rounded-full px-6 py-4 shadow-2xl font-semibold text-sm flex items-center justify-between gap-4 transition-all translate-y-24 opacity-0 pointer-events-none">
+  <span id="floatText">View Order</span><svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+</button>
+
+<!-- Cart drawer -->
+<div id="cartOverlay" class="fade fixed inset-0 z-50 bg-black/55"></div>
+<aside id="cartDrawer" class="drawer fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-ivory flex flex-col shadow-2xl" aria-label="Your order">
+  <div class="flex items-center justify-between px-6 py-5 bg-forest text-ivory">
+    <h2 class="font-display text-xl">Your Order</h2>
+    <button id="closeCart" class="p-1 hover:text-gold" aria-label="Close"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="flex-1 overflow-y-auto px-6 py-5">
+    <div id="cartItems" class="space-y-3"></div>
+    <div id="cartEmpty" class="text-center text-charcoal/60 py-16">
+      <p class="font-display text-xl text-forest">Your order is empty</p><p class="text-sm mt-2">Add something delicious from the menu.</p>
+    </div>
+    <div id="checkoutFields" class="mt-6 space-y-4 hidden">
+      <p class="text-xs text-charcoal/70 bg-sand rounded-lg px-4 py-3">All orders are placed on WhatsApp. Add your name and phone, then tap the button below. Please include your delivery address or pickup preference in the WhatsApp chat.</p>
+      <div><label class="text-xs font-semibold text-charcoal/70">Your name</label><input id="custName" type="text" placeholder="Full name" class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm"></div>
+      <div><label class="text-xs font-semibold text-charcoal/70">Phone</label><input id="custPhone" type="tel" placeholder="+233 ..." class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm"></div>
+      </div>
+  </div>
+  <div class="border-t border-sand bg-white px-6 py-5">
+    <div class="flex items-center justify-between mb-4"><span class="text-sm text-charcoal/70">Total</span><span id="cartTotal" class="font-display text-2xl font-bold text-forest">GH₵ 0</span></div>
+    <button id="placeOrder" class="w-full bg-forest text-gold font-bold text-xs tracking-widest py-4 rounded-full hover:bg-bronze hover:text-ivory transition disabled:opacity-40 disabled:cursor-not-allowed">ORDER ON WHATSAPP</button>
+  </div>
+</aside>
+
+<!-- Order confirmation modal -->
+<div id="orderModal" class="fade fixed inset-0 z-[60] bg-black/60 flex items-center justify-center p-4">
+  <div class="bg-ivory rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto p-7 shadow-2xl">
+    <div class="w-14 h-14 rounded-full bg-gold/25 text-bronze flex items-center justify-center mx-auto"><svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+    <h3 class="font-display text-2xl text-forest text-center mt-4">Order ready to send</h3>
+    <p class="text-sm text-charcoal/70 text-center mt-1" id="orderRef"></p>
+    <pre id="orderSummary" class="mt-5 bg-white rounded-xl p-4 text-xs leading-relaxed whitespace-pre-wrap font-sans border border-sand"></pre>
+    <a id="waLink" target="_blank" rel="noopener" class="mt-5 block text-center bg-[#25D366] text-white font-bold text-xs tracking-widest py-4 rounded-full">SEND VIA WHATSAPP</a>
+    <button id="orderDone" class="mt-3 w-full text-xs font-bold tracking-widest py-3 text-forest underline underline-offset-4">DONE &amp; CLEAR ORDER</button>
+  </div>
+</div>
+
+<!-- Reservation modal -->
+<div id="resModal" class="fade fixed inset-0 z-[60] bg-black/60 flex items-center justify-center p-4">
+  <div class="bg-ivory rounded-2xl max-w-lg w-full max-h-[92vh] overflow-y-auto shadow-2xl">
+    <div class="flex items-center justify-between px-7 py-5 bg-forest text-ivory rounded-t-2xl">
+      <h3 class="font-display text-xl">Reserve a Table</h3>
+      <button id="closeRes" aria-label="Close" class="hover:text-gold"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <form id="resForm" class="p-7 grid grid-cols-2 gap-4" novalidate>
+      <div class="col-span-2"><label class="text-xs font-semibold text-charcoal/70">Full name</label><input name="name" required class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm" placeholder="Your name"></div>
+      <div class="col-span-2"><label class="text-xs font-semibold text-charcoal/70">Phone</label><input name="phone" type="tel" required class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm" placeholder="+233 ..."></div>
+      <div><label class="text-xs font-semibold text-charcoal/70">Date</label><input id="resDate" name="date" type="date" required class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm"></div>
+      <div><label class="text-xs font-semibold text-charcoal/70">Time</label><input name="time" type="time" required class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm"></div>
+      <div><label class="text-xs font-semibold text-charcoal/70">Guests</label><select name="guests" class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9+</option></select></div>
+      <div><label class="text-xs font-semibold text-charcoal/70">Seating area</label><select name="area" class="mt-1 w-full rounded-lg border border-sand bg-white px-4 py-3 text-sm"><option>Indoor Dining</option><option>Garden / Outdoor</option><option>Private Corner</option></select></div>
+      <button class="col-span-2 bg-forest text-gold font-bold text-xs tracking-widest py-4 rounded-full hover:bg-bronze hover:text-ivory transition">CONFIRM RESERVATION</button>
+    </form>
+    <div id="resDone" class="hidden p-9 text-center">
+      <div class="w-16 h-16 rounded-full bg-gold/25 text-bronze flex items-center justify-center mx-auto"><svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+      <h3 class="font-display text-2xl text-forest mt-5">Table reserved</h3>
+      <p id="resMsg" class="text-sm text-charcoal/75 mt-3 leading-relaxed"></p>
+      <a id="resWa" target="_blank" rel="noopener" class="mt-6 block bg-[#25D366] text-white font-bold text-xs tracking-widest px-8 py-3 rounded-full">CONFIRM ON WHATSAPP</a>
+      <button id="resClose2" class="mt-3 text-forest font-bold text-xs tracking-widest px-8 py-3 underline underline-offset-4">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="fade fixed inset-0 z-[70] bg-black/90 flex items-center justify-center p-4">
+  <button id="lbClose" class="absolute top-5 right-5 text-ivory hover:text-gold" aria-label="Close"><svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button id="lbPrev" class="absolute left-3 sm:left-8 text-ivory text-4xl hover:text-gold px-3" aria-label="Previous">&#8249;</button>
+  <figure class="max-w-4xl w-full"><img id="lbImg" class="w-full max-h-[78vh] object-contain rounded-lg" alt=""><figcaption id="lbCap" class="text-center text-ivory/80 text-sm mt-3"></figcaption></figure>
+  <button id="lbNext" class="absolute right-3 sm:right-8 text-ivory text-4xl hover:text-gold px-3" aria-label="Next">&#8250;</button>
+</div>
+
+<script>
+/* Embedded photos (base64) so the file works on its own */
+const IMG = {"interior": "interior.jpg", "garden": "garden.jpg", "greensoup": "greensoup.jpg", "yamfish": "yamfish.jpg", "dancers": "dancers.jpg", "jollof": "jollof.jpg", "eggstew": "eggstew.jpg", "logo": "logo.png"};
+</script>
+<script>
+/* ================= CONFIG ================= */
+const WHATSAPP_NUMBER = "233209470634"; // Brinna Ventures WhatsApp
+const CURRENCY = "GH₵";
+
+/* ================= MENU DATA ================= */
+const SOUP_NOTE = "Base soup — pair with your choice of protein & accompaniment";
+const mk = (cat, sub, arr) => arr.map(([name, price, note, sunday]) => ({ cat, sub, name, price, note: note || "", sunday: !!sunday }));
+const MENU = [
+  ...mk("Local Soups & Stews","Stews",[["Goat Stew",125],["Red Red Only",65],["Palava Sauce",40],["Vegetable Stew",30],["Garden Egg Stew",60],["Egg Stew",50]]),
+  ...mk("Local Soups & Stews","Soups",[["Light Soup",0,SOUP_NOTE],["Groundnut Soup",0,SOUP_NOTE],["Palmnut Soup",0,SOUP_NOTE],["Green Green Soup",0,SOUP_NOTE],["Okro Stew",0,SOUP_NOTE],["Were-Were Soup",0,SOUP_NOTE],["Omo Tuo Soup",0,SOUP_NOTE,true],["Tuo Zaafi Soup",0,SOUP_NOTE,true]]),
+  ...mk("Accompaniments & Rice","Swallows & Sides",[["Fufu",15],["Banku",15],["Omo Tuo",15,"",true],["Tuo Zaafi / TZ",15,"",true],["Konkonte",15,"",true],["Plain Rice",40],["Fried Rice",40],["Jollof Rice",40],["Potato Chips",40],["Yam Chips",40],["Boiled Yam",40],["Boiled Plantain",40],["Ripe Plantain — Boiled or Fried",40],["Kelewele",40],["Steamed Vegetables",30]]),
+  ...mk("Accompaniments & Rice","Fried Rice & Jollof Combos",[["With Chicken",150],["With Beef",170],["With Goat",170],["With Vegetables",70],["Assorted — Beef, Chicken & Goat",195]]),
+  ...mk("Proteins & Grill","From the Grill",[["1/4 Chicken",80],["Red Fish",70],["Pork",100],["Tilapia",150]]),
+  ...mk("Proteins & Grill","Hot & Spicy",[["Wings",85],["Goat",125],["Beef",125],["Gizzard",70]]),
+  ...mk("Proteins & Grill","Proteins (Portions)",[["Akrantie",85],["Chicken Steamed",70],["Goat Steamed",65],["Red Fish",70],["Dry Fish",70],["Beef",60],["Tuna",50],["Fresh Salmon",50],["Smoked Salmon",50],["Cow Leg",50],["Intestine",20],["Wele",20],["Crab",20],["Snail",75],["Tilapia Steamed",155],["Boiled Egg",7]]),
+  ...mk("Continental & Light Bites","Sandwiches & Salads",[["Club Sandwich & Chips",110],["Tuna Sandwich & Chips",90],["House Salad — Mixed Veg",70,"With dressing & toasted bread"],["Ghana Salad — Beef & Chicken",85,"With dressing & toasted bread"],["Tuna Salad",75,"With dressing & toasted bread"],["Chicken Salad",80,"With dressing & toasted bread"]]),
+  ...mk("Continental & Light Bites","Continental Sauces",[["Beef Sauce",140],["Chicken Sauce",85],["Pork Sauce",110],["Vegetable Sauce",40]]),
+  ...mk("Continental & Light Bites","Light Bites",[["Samosa",50],["Vegetable Spring Rolls",50]]),
+  ...mk("Wines & Brandies","Wines",[["Tall Horse",450],["Robertson",390],["Boschkloof",390],["Nederburg",500],["Sparkling Wine",350],["Sparkling Wine — Sweet",330],["Sparkling Wine — Non-Alcoholic",330],["Cape Dreams",350]]),
+  ...mk("Wines & Brandies","Shots — Brandies (50ml)",[["Camus VSOP",150],["Courvoisier VS",120],["Courvoisier VSOP",150],["Hennessy VS",120],["Hennessy VSOP",150],["Martell VSOP",150],["Remy Martin VSOP",150]])
+];
+// Give every item a unique id (category + subcategory + name)
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+MENU.forEach(i => i.id = slug(i.cat) + "__" + slug(i.sub) + "__" + slug(i.name));
+const byId = Object.fromEntries(MENU.map(i => [i.id, i]));
+const findId = (sub, name) => MENU.find(i => i.sub === sub && i.name === name).id;
+// Display name in cart (adds context for ambiguous names)
+const cartName = i => (["From the Grill","Hot & Spicy"].includes(i.sub) ? i.name + " (" + i.sub + ")" : i.sub === "Fried Rice & Jollof Combos" ? "Fried Rice / Jollof " + i.name : i.name);
+
+/* Image fallbacks: local file first, then verified stock photo, then inline art. Swap URLs freely. */
+const FALLBACK_SVG = "data:image/svg+xml;utf8," + encodeURIComponent(
+ "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='1'><stop offset='0' stop-color='#2A140C'/><stop offset='1' stop-color='#A9792F'/></linearGradient></defs><rect width='800' height='600' fill='url(#g)'/><circle cx='400' cy='300' r='90' fill='none' stroke='#DDB75E' stroke-width='3'/><text x='400' y='312' font-family='serif' font-size='30' fill='#DDB75E' text-anchor='middle'>The Living Room</text></svg>");
+
+const SIGNATURES = [
+  { title:"Fish Stew, Yam & Plantain", desc:"Rich red fish stew in a clay pot with an egg, avocado, soft boiled yam and plantain.", itemId: findId("Swallows & Sides","Boiled Yam"), label:"Boiled Yam", srcs:["@yamfish"] },
+  { title:"Smoky Ghanaian Jollof & Grilled Chicken", desc:"Party-style jollof with beef, chicken and goat, served the way Accra loves it, with fried plantain.", itemId: findId("Fried Rice & Jollof Combos","Assorted — Beef, Chicken & Goat"), label:"Jollof Assorted", srcs:["@jollof"] },
+  { title:"Sunday Traditional Feast", desc:"Omo Tuo with your choice of soup, served Sundays only, the heart of Ghanaian tradition.", itemId: findId("Swallows & Sides","Omo Tuo"), label:"Omo Tuo (Sundays)", srcs:["@greensoup"] }
+];
+
+const GALLERY = [
+  { cap:"Traditional dance at a Ghanaian durbar", srcs:["@dancers"] },
+  { cap:"Hearty stew with boiled eggs in a clay bowl", srcs:["@eggstew"] },
+  { cap:"Warm, tree-lit dining hall", srcs:["@interior"] },
+  { cap:"Our green garden seating", srcs:["@garden"] },
+  { cap:"Smoky jollof with grilled chicken", srcs:["@jollof"] },
+  { cap:"Green soup, served in earthenware", srcs:["@greensoup"] }
+];
+
+/* ================= HELPERS ================= */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const fmt = n => CURRENCY + " " + n.toLocaleString("en-GH");
+const resolve = s => s.charAt(0) === "@" ? IMG[s.slice(1)] : s;
+function imgWithFallback(img, srcs) {
+  let k = 0; const list = [...srcs.map(resolve), FALLBACK_SVG];
+  img.onerror = () => { k++; if (k < list.length) img.src = list[k]; };
+  img.src = list[0];
+}
+$$("img[data-srcs]").forEach(img => imgWithFallback(img, img.dataset.srcs.split("|")));
+(function heroSlideshow(){
+  const slides = $$(".hero-slide"); if (slides.length < 2) return;
+  let i = 0;
+  setInterval(() => {
+    slides[i].classList.remove("active");
+    i = (i + 1) % slides.length;
+    // restart the zoom animation on the incoming slide
+    slides[i].style.animation = "none"; void slides[i].offsetWidth; slides[i].style.animation = "";
+    slides[i].classList.add("active");
+  }, 6500);
+})();
+
+/* ================= CART STATE ================= */
+const cart = {}; // id -> qty
+const count = () => Object.values(cart).reduce((a,b)=>a+b,0);
+const total = () => Object.entries(cart).reduce((s,[id,q]) => s + byId[id].price * q, 0);
+function setQty(id, q) { if (q <= 0) delete cart[id]; else cart[id] = q; render(); }
+const add = id => setQty(id, (cart[id]||0) + 1);
+const sub = id => setQty(id, (cart[id]||0) - 1);
+
+/* ================= RENDER: MENU ================= */
+const CATS = ["Local Soups & Stews","Accompaniments & Rice","Proteins & Grill","Continental & Light Bites","Wines & Brandies"];
+let activeCat = "All";
+function buildTabs() {
+  const tabs = $("#tabs");
+  tabs.innerHTML = ["All", ...CATS].map(c => `<button data-cat="${c}" class="tab shrink-0 px-5 py-2.5 rounded-full border border-bronze/50 text-xs font-semibold tracking-wide transition hover:border-forest">${c}</button>`).join("");
+  tabs.addEventListener("click", e => { const b = e.target.closest(".tab"); if (!b) return; activeCat = b.dataset.cat; renderMenu(); syncTabs(); });
+  syncTabs();
+}
+const syncTabs = () => $$(".tab").forEach(t => t.classList.toggle("tab-active", t.dataset.cat === activeCat));
+
+/* ===== MENU PHOTOS =====
+   Every card looks for menu/<photoKey>.jpg (see menu-photo-checklist.txt for all keys).
+   Only add an entry below when the photo truly shows that exact dish ("@name" = photo embedded in this file). */
+const MENU_PHOTOS = {
+  "with-chicken": "@jollof"   // Jollof rice with grilled chicken & fried plantain
+};
+const nameCount = {}; MENU.forEach(i => nameCount[slug(i.name)] = (nameCount[slug(i.name)]||0) + 1);
+MENU.forEach(i => { i.key = nameCount[slug(i.name)] > 1 || i.sub === "Fried Rice & Jollof Combos" ? slug(i.sub) + "-" + slug(i.name) : slug(i.name); });
+// the embedded jollof photo belongs to the combo "With Chicken"
+MENU_PHOTOS["fried-rice-jollof-combos-with-chicken"] = MENU_PHOTOS["with-chicken"]; delete MENU_PHOTOS["with-chicken"];
+const photoSrc = i => MENU_PHOTOS[i.key] ? resolve(MENU_PHOTOS[i.key]) : "";
+function cardHTML(i) {
+  const q = cart[i.id] || 0;
+  const price = i.price === 0 ? `<span class="text-bronze font-semibold text-sm">Base soup</span>` : `<span class="font-display font-semibold text-forest">${fmt(i.price)}</span>`;
+  return `<div class="menu-card ${q ? "selected" : ""} bg-white rounded-xl p-4 flex flex-col justify-between gap-3" data-card="${i.id}" role="button" tabindex="0" aria-label="Add ${i.name}">
+    ${photoSrc(i) ? `<div class="ph -mx-4 -mt-4 mb-1 rounded-t-xl" style="width:calc(100% + 2rem)"><img loading="lazy" alt="${i.name}" src="${photoSrc(i)}"></div>` : ""}
+    <div>
+      <div class="flex items-start justify-between gap-3">
+        <h4 class="font-semibold text-[15px] leading-snug text-charcoal">${i.name}</h4>${price}
+      </div>
+      ${i.sunday ? `<span class="inline-block mt-1.5 text-[10px] font-bold tracking-wider bg-gold/30 text-bronze rounded-full px-2 py-0.5">SUNDAYS ONLY</span>` : ""}
+      ${i.note ? `<p class="text-xs text-charcoal/60 mt-1.5 leading-snug">${i.note}</p>` : ""}
+    </div>
+    ${qtyBar(i.id)}
+  </div>`;
+}
+function qtyBar(id) {
+  const q = cart[id] || 0;
+  if (!q) return `<button data-add="${id}" class="w-full bg-sand hover:bg-gold text-forest text-xs font-bold tracking-widest py-2.5 rounded-full transition">ADD TO ORDER</button>`;
+  return `<div class="flex items-center justify-between bg-forest text-ivory rounded-full px-1.5 py-1">
+    <button data-sub="${id}" class="w-8 h-8 rounded-full hover:bg-white/15 text-lg leading-none" aria-label="Decrease">−</button>
+    <span class="font-semibold text-sm">${q}</span>
+    <button data-add="${id}" class="w-8 h-8 rounded-full hover:bg-white/15 text-lg leading-none" aria-label="Increase">+</button></div>`;
+}
+function renderMenu() {
+  const root = $("#menuRoot");
+  const cats = activeCat === "All" ? CATS : [activeCat];
+  root.innerHTML = cats.map(cat => {
+    const subs = [...new Set(MENU.filter(i => i.cat === cat).map(i => i.sub))];
+    return `<div><h3 class="font-display text-2xl sm:text-3xl text-forest mb-1">${cat}</h3><div class="h-0.5 w-16 bg-gold mb-7"></div>` +
+      subs.map(s => `<div class="mb-9"><h4 class="text-xs tracking-[.25em] text-bronze font-bold mb-4 uppercase">${s}</h4>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">${MENU.filter(i => i.cat === cat && i.sub === s).map(cardHTML).join("")}</div></div>`).join("") + `</div>`;
+  }).join("");
+}
+
+/* ================= RENDER: SIGNATURE / GALLERY ================= */
+function renderSignature() {
+  $("#sigGrid").innerHTML = SIGNATURES.map((s,n) => `<article class="reveal bg-ivory rounded-2xl overflow-hidden shadow-md flex flex-col">
+    <img id="sig${n}" class="h-60 w-full object-cover" alt="${s.title}">
+    <div class="p-6 flex flex-col flex-1"><h3 class="font-display text-xl text-forest">${s.title}</h3><p class="text-sm text-charcoal/70 mt-2 flex-1">${s.desc}</p>
+      <div class="mt-5" id="sigCtl${n}"></div></div></article>`).join("");
+  SIGNATURES.forEach((s,n) => imgWithFallback($("#sig"+n), s.srcs));
+  syncSignature();
+}
+function syncSignature() {
+  SIGNATURES.forEach((s,n) => {
+    const q = cart[s.itemId] || 0, p = byId[s.itemId].price;
+    $("#sigCtl"+n).innerHTML = q ? qtyBar(s.itemId) : `<button data-add="${s.itemId}" class="w-full bg-forest text-gold text-xs font-bold tracking-widest py-3 rounded-full hover:bg-bronze hover:text-ivory transition">ADD ${s.label.toUpperCase()} • ${fmt(p)}</button>`;
+  });
+}
+function renderGallery() {
+  $("#galleryGrid").innerHTML = GALLERY.map((g,n) => `<button data-lb="${n}" class="group relative overflow-hidden rounded-xl aspect-[4/3] ${n===0||n===5 ? "md:aspect-[4/3]" : ""}"><img id="gal${n}" alt="${g.cap}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500"><span class="absolute inset-0 bg-forest/0 group-hover:bg-forest/40 transition"></span></button>`).join("");
+  GALLERY.forEach((g,n) => imgWithFallback($("#gal"+n), g.srcs));
+}
+
+/* ================= RENDER: CART ================= */
+function renderCart() {
+  const n = count(), t = total();
+  const badge = $("#navBadge"); badge.textContent = n; badge.classList.toggle("hidden", !n);
+  const fc = $("#floatCart");
+  $("#floatText").textContent = `View Order (${n} item${n>1?"s":""}) • ${fmt(t)}`;
+  fc.classList.toggle("translate-y-24", !n); fc.classList.toggle("opacity-0", !n); fc.classList.toggle("pointer-events-none", !n);
+  $("#cartTotal").textContent = fmt(t);
+  $("#cartEmpty").classList.toggle("hidden", n > 0);
+  $("#checkoutFields").classList.toggle("hidden", !n);
+  $("#placeOrder").disabled = !n;
+  $("#cartItems").innerHTML = Object.entries(cart).map(([id,q]) => { const i = byId[id]; return `<div class="bg-white rounded-xl p-3.5 flex items-center gap-3">
+    <div class="flex-1 min-w-0"><p class="font-semibold text-sm truncate">${cartName(i)}</p><p class="text-xs text-charcoal/60">${i.price ? fmt(i.price) + " each" : "Base soup"}</p></div>
+    <div class="flex items-center bg-sand rounded-full"><button data-sub="${id}" class="w-8 h-8 text-lg">−</button><span class="w-6 text-center text-sm font-semibold">${q}</span><button data-add="${id}" class="w-8 h-8 text-lg">+</button></div>
+    <p class="w-20 text-right text-sm font-semibold">${fmt(i.price*q)}</p>
+    <button data-rm="${id}" class="text-charcoal/40 hover:text-red-700" aria-label="Remove"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button></div>`; }).join("");
+}
+function render() { renderMenu(); syncSignature(); renderCart(); }
+
+/* ================= EVENTS: ADD / SUB / CARD CLICK ================= */
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-add]"); if (a) { e.stopPropagation(); add(a.dataset.add); return; }
+  const s = e.target.closest("[data-sub]"); if (s) { e.stopPropagation(); sub(s.dataset.sub); return; }
+  const r = e.target.closest("[data-rm]"); if (r) { delete cart[r.dataset.rm]; render(); return; }
+  const c = e.target.closest("[data-card]"); if (c) { add(c.dataset.card); return; }
+  const lb = e.target.closest("[data-lb]"); if (lb) { openLb(+lb.dataset.lb); return; }
+  if (e.target.closest("[data-reserve]")) { closeMobile(); openRes(); }
+});
+document.addEventListener("keydown", e => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.matches("[data-card]")) { e.preventDefault(); add(e.target.dataset.card); }
+  if (e.key === "Escape") { closeCart(); closeRes(); closeLb(); }
+  if ($("#lightbox").classList.contains("show")) { if (e.key === "ArrowRight") stepLb(1); if (e.key === "ArrowLeft") stepLb(-1); }
+});
+
+/* ================= DRAWER ================= */
+function openCart() { $("#cartDrawer").classList.add("open"); $("#cartOverlay").classList.add("show"); document.body.style.overflow = "hidden"; }
+function closeCart() { $("#cartDrawer").classList.remove("open"); $("#cartOverlay").classList.remove("show"); document.body.style.overflow = ""; }
+$("#navCartBtn").onclick = openCart; $("#floatCart").onclick = openCart; $("#closeCart").onclick = closeCart; $("#cartOverlay").onclick = closeCart;
+
+/* ================= PLACE ORDER ================= */
+$("#placeOrder").onclick = () => {
+  const name = $("#custName").value.trim(), phone = $("#custPhone").value.trim();
+    const ref = "BV-" + Math.random().toString(36).slice(2,7).toUpperCase();
+  const lines = Object.entries(cart).map(([id,q]) => { const i = byId[id]; return `• ${q} × ${cartName(i)}` + (i.price ? ` — ${fmt(i.price*q)}` : ""); });
+  const text = `BRINNA VENTURES\nOrder ${ref}\n\n${lines.join("\n")}\n\nTotal: ${fmt(total())}\nName: ${name || "-"}\nPhone: ${phone || "-"}`;
+  $("#orderRef").textContent = "Reference " + ref;
+  $("#orderSummary").textContent = text;
+  $("#waLink").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  closeCart(); $("#orderModal").classList.add("show");
+};
+$("#orderDone").onclick = () => { $("#orderModal").classList.remove("show"); Object.keys(cart).forEach(k => delete cart[k]); render(); };
+
+/* ================= RESERVATION ================= */
+function openRes() { $("#resModal").classList.add("show"); document.body.style.overflow = "hidden"; $("#resForm").classList.remove("hidden"); $("#resDone").classList.add("hidden"); }
+function closeRes() { $("#resModal").classList.remove("show"); if (!$("#cartDrawer").classList.contains("open")) document.body.style.overflow = ""; }
+$("#closeRes").onclick = closeRes; $("#resClose2").onclick = closeRes;
+$("#resModal").addEventListener("click", e => { if (e.target.id === "resModal") closeRes(); });
+$("#resDate").min = new Date().toISOString().split("T")[0];
+$("#resForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const f = Object.fromEntries(new FormData(e.target));
+  f.name=f.name.trim()||"Guest"; f.phone=f.phone.trim()||"-"; f.date=f.date||new Date().toISOString().split("T")[0]; f.time=f.time||"12:00";
+  const d = new Date(f.date + "T00:00").toLocaleDateString("en-GB", { weekday:"long", day:"numeric", month:"long" });
+  $("#resMsg").innerHTML = `Thank you, <b>${f.name.trim()}</b>. We have a table for <b>${f.guests}</b> in the <b>${f.area}</b> on <b>${d}</b> at <b>${f.time}</b>. Tap below to send this to us on WhatsApp so we can confirm.`;
+  $("#resWa").href = `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(`BRINNA VENTURES - Table reservation\nName: ${f.name.trim()}\nPhone: ${f.phone.trim()}\nDate: ${d}\nTime: ${f.time}\nGuests: ${f.guests}\nSeating: ${f.area}`);
+  $("#resForm").classList.add("hidden"); $("#resDone").classList.remove("hidden"); e.target.reset();
+});
+
+/* ================= ENQUIRY ================= */
+$("#enqForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const f = Object.fromEntries(new FormData(e.target));
+  const text = `BRINNA VENTURES - ${f.type} enquiry\nName: ${f.name.trim() || "-"}\nPhone: ${f.phone.trim() || "-"}\nGuests: ${f.guests || "not sure yet"}\nDate: ${f.date || "not sure yet"}\nDetails: ${f.notes.trim() || "-"}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
+});
+
+/* ================= LIGHTBOX ================= */
+let lbIdx = 0;
+function openLb(n) { lbIdx = n; showLb(); $("#lightbox").classList.add("show"); document.body.style.overflow = "hidden"; }
+function showLb() { const img = $("#lbImg"); imgWithFallback(img, GALLERY[lbIdx].srcs); $("#lbCap").innerHTML = GALLERY[lbIdx].cap; }
+function stepLb(d) { lbIdx = (lbIdx + d + GALLERY.length) % GALLERY.length; showLb(); }
+function closeLb() { $("#lightbox").classList.remove("show"); document.body.style.overflow = ""; }
+$("#lbClose").onclick = closeLb; $("#lbPrev").onclick = () => stepLb(-1); $("#lbNext").onclick = () => stepLb(1);
+$("#lightbox").addEventListener("click", e => { if (e.target.id === "lightbox") closeLb(); });
+
+/* ================= NAV ================= */
+const nav = $("#nav");
+const onScroll = () => nav.classList.toggle("bg-forest", scrollY > 60) || nav.classList.toggle("shadow-lg", scrollY > 60);
+addEventListener("scroll", onScroll, { passive: true }); onScroll();
+const closeMobile = () => $("#mobileMenu").classList.add("hidden");
+$("#burger").onclick = () => { $("#mobileMenu").classList.toggle("hidden"); nav.classList.add("bg-forest"); };
+$$(".mm-link").forEach(l => l.addEventListener("click", closeMobile));
+
+/* ================= SCROLL REVEAL ================= */
+const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }), { threshold: .12 });
+const observeReveals = () => $$(".reveal:not(.in)").forEach(el => io.observe(el));
+
+/* ================= INIT ================= */
+$("#yr").textContent = new Date().getFullYear();
+buildTabs(); renderSignature(); renderGallery(); render(); observeReveals();
+</script>
+</body>
+</html>
